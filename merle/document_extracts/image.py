@@ -1,4 +1,4 @@
-from collectinos import OrderedDict
+from collections import OrderedDict
 SELECTORS = OrderedDict()
 SELECTORS['og'] = """head/meta[@property="og:image"]/@content"""
 SELECTORS['twitter'] = """head/meta[@property="twitter:image"]/@content"""

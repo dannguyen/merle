@@ -1,8 +1,9 @@
 from collections import OrderedDict
+from importlib import import_module
 
-def extract_element(element_name, doc):
+def extract_element(element_name, resource):
     selectors = get_selectors_by_name(element_name)
-    el_html = doc['html']
+    el_html = resource.doc
     candidates = OrderedDict()
     for key, sel in selectors.items():
         selstring = "//%s" % sel
@@ -12,5 +13,5 @@ def extract_element(element_name, doc):
     return candidates
 
 
-def get_selectors_by_name():
-    pass
+def get_selectors_by_name(element_name):
+    return import_module('document_extracts.{0}'.format(element_name)).SELECTORS
