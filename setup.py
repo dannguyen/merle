@@ -21,10 +21,14 @@ setup(
     author_email='dansonguyen@gmail.com',
     url='http://danwin.com',
     license='MIT',
-    classifiers=['Whoa :: Dude'],
+    classifiers=[
+            'Programming Language :: Python :: 3.4',
+            'Environment :: Console',
+            'Intended Audience :: Developers'
+    ],
     packages=['merle'],
     entry_points={
-        'console_scripts': ['merle = merli.cli']
+        'console_scripts': ['merle = merli.cli:fetch_metadata']
     },
     install_requires = ['merle']
 )

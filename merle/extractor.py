@@ -12,10 +12,8 @@ def extract_element_from_doc(element_name, doc):
     return candidates
 
 
-def extract_element(element_name, resource): # to be deprecated...?    
+def extract_element(element_name, resource): # to be deprecated...?
     return extract_element_from_doc(resource.doc)
 
-
-
 def get_selectors_by_name(element_name):
-    return import_module('document_extracts.{0}'.format(element_name)).SELECTORS
+    return import_module('merle.document_extracts.{0}'.format(element_name)).SELECTORS

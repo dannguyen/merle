@@ -1,0 +1,4 @@
+awesome-slugify
+click
+newspaper3k
+rtyaml

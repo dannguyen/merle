@@ -1,5 +1,5 @@
 # import requests
-from extractor import extract_element_from_doc
+from merle.extractor import extract_element_from_doc
 from datetime import datetime
 from slugify import slugify_url
 from urllib.parse import urlparse

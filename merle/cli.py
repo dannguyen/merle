@@ -1,26 +1,10 @@
 import click
-from collections import OrderedDict
-from fetched_resource import FetchedResource
-from extractor import extract_element
 import rtyaml as ryaml
-# CONTEXT_SETTINGS = {'help_option_names': ['-h', '--help']}
-#
-# @click.group(context_settings=CONTEXT_SETTINGS)
-# def hello_world():
-#     pass
-#
-
-# @hello_world.command()
-# @click.argument('url')
-# def info(**kwargs):
-#     url = kwargs['url']
-#     print(url)
+from collections import OrderedDict
+from merle.fetched_resource import FetchedResource
 
 def dumper(obj):
     return ryaml.dump(obj)
-
-
-## temp
 
 
 @click.command()
@@ -40,6 +24,7 @@ def fetch_metadata(url):
 
 
     click.echo(dumper(o))
+
 
 
 if __name__ == '__main__':
