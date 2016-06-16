@@ -7,19 +7,19 @@ from setuptools import setup
 install_requires = [
     'newspaper3k>0.1.7',
     'click>=6.6',
-    'rtyaml>=0.0.3',
+    'jinja2>=2.8',
     'awesome-slugify>=1.6.5'
 ]
 
 
 setup(
     name = "merle",
-    version='0.0.1',
+    version='0.0.2',
     description='Command-line tool for extracting metadata from URLs',
     long_description='Yada',
     author='Dan Nguyen',
     author_email='dansonguyen@gmail.com',
-    url='http://danwin.com',
+    url='https://github.com/dannguyen/merle',
     license='MIT',
     classifiers=[
             'Programming Language :: Python :: 3.4',
@@ -27,8 +27,9 @@ setup(
             'Intended Audience :: Developers'
     ],
     packages=['merle'],
+    package_data={'jinja templates': 'merle/templates/*.txt'},
     entry_points={
-        'console_scripts': ['merle = merli.cli:fetch_metadata']
+        'console_scripts': ['merle = merle.cli:fetch_metadata']
     },
-    install_requires = ['merle']
+    install_requires = install_requires
 )

@@ -1,4 +1,4 @@
 awesome-slugify
 click
 newspaper3k
-rtyaml
+jinja2

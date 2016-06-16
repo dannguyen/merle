@@ -1,10 +1,16 @@
 import click
-import rtyaml as ryaml
 from collections import OrderedDict
+from jinja2 import Environment, PackageLoader
 from merle.fetched_resource import FetchedResource
 
-def dumper(obj):
-    return ryaml.dump(obj)
+
+DEFAULT_TEMPLATE = 'yaml.jinja2.txt'
+
+def dumper(obj, template_name=DEFAULT_TEMPLATE):
+    env = Environment(loader=PackageLoader('merle', 'templates'),
+                      trim_blocks=True, lstrip_blocks=True)
+    t = env.get_template(template_name)
+    return t.render(f=obj)
 
 
 @click.command()

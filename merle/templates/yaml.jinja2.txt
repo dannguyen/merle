@@ -1,0 +1,19 @@
+slug: {{ f.slug }}
+fetched_at: {{ f.fetched_at }}
+url: {{ f.url }}
+title: {{ f.title }}
+description: |
+  {{ f.description }}
+{% if f.authors %}
+authors:
+  {% for a in f.authors %}
+  - {{ a }}
+  {% endfor %}
+{% endif %}
+{% if f.word_count %}
+word_count: {{ f.word_count }}
+{% endif %}
+{% if f.excerpt %}
+excerpt: |
+  {{ f.excerpt }}
+{% endif %}
