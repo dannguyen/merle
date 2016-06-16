@@ -1,0 +1,11 @@
+newyorker.com,The New Yorker
+nytimes.com,The New York Times
+propublica.org,ProPublica
+sacbee.com,Sacramento Bee
+npr.org,NPR
+wnyc.org,WNYC
+ft.com,Financial Times
+wsj.com,The Wall Street Journal
+bloomberg.com/features,Bloomberg Businessweek
+bloomberg.com,Bloomberg
+qz.com,Quartz

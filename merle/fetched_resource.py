@@ -41,7 +41,7 @@ class FetchedResource:
         _url = urlparse(self.returned_url)
         # stuff
         self.url_scheme = _url.scheme
-        self.url_domain = _url.netloc
+        self.url_domain = re.sub('^www\.', '', _url.netloc)
         self.url_path = _url.path
         self.url_fragment = _url.fragment
         self.url_query_string = _url.query

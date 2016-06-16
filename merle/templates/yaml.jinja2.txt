@@ -4,6 +4,7 @@ url: {{ f.url }}
 title: {{ f.title }}
 description: |
   {{ f.description }}
+published_at: {{ f.published_at | default("''", true) }}
 {% if f.authors %}
 authors:
   {% for a in f.authors %}

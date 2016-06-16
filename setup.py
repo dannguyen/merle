@@ -11,10 +11,9 @@ install_requires = [
     'awesome-slugify>=1.6.5'
 ]
 
-
 setup(
     name = "merle",
-    version='0.0.2.1',
+    version='0.0.2.2',
     description='Command-line tool for extracting metadata from URLs',
     long_description='Yada',
     author='Dan Nguyen',
@@ -27,7 +26,9 @@ setup(
             'Intended Audience :: Developers'
     ],
     packages=['merle'],
-    package_data={'jinja templates': 'merle/templates/*.txt'},
+    package_data={
+        'jinja templates': 'merle/templates/*.txt',
+        'data': 'merle/data/*.txt'},
     entry_points={
         'console_scripts': ['merle = merle.cli:fetch_metadata']
     },
