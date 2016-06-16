@@ -5,7 +5,7 @@ from setuptools import setup
 
 
 install_requires = [
-    'newspaper3k>0.1.7',
+    'newspaper3k>=0.1.7',
     'click>=6.6',
     'jinja2>=2.8',
     'awesome-slugify>=1.6.5'
@@ -14,7 +14,7 @@ install_requires = [
 
 setup(
     name = "merle",
-    version='0.0.2',
+    version='0.0.2.1',
     description='Command-line tool for extracting metadata from URLs',
     long_description='Yada',
     author='Dan Nguyen',
