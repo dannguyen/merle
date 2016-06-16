@@ -2,9 +2,7 @@ import click
 from collections import OrderedDict
 from fetched_resource import FetchedResource
 from extractor import extract_element
-from newspaper import fulltext
-import ruamel.yaml as ryaml
-import re
+import rtyaml as ryaml
 # CONTEXT_SETTINGS = {'help_option_names': ['-h', '--help']}
 #
 # @click.group(context_settings=CONTEXT_SETTINGS)
@@ -19,23 +17,27 @@ import re
 #     print(url)
 
 def dumper(obj):
-    return ryaml.dump(obj, Dumper=ryaml.RoundTripDumper)
+    return ryaml.dump(obj)
 
-def excerpt(resource, wordcount=60):
-    txt = re.sub('\s+', ' ', fulltext(resource.html)).strip()
-    words = re.split(r' ', txt)
-    exwords = words if len(words) < wordcount else words[:wordcount] + ['...']
-    return ' '.join(exwords)
+
+## temp
+
 
 @click.command()
 @click.argument('url')
 def fetch_metadata(url):
     o = OrderedDict()
     f = FetchedResource(url)
+    o['slug'] = f.slug
     o['url'] = f.returned_url
-    o['title'] = list(extract_element('title', f).values())[0]
-    o['excerpt'] = excerpt(f)
+    o['title'] = f.title
+    o['description'] = f.description
     o['fetched_at'] = f.fetched_at
+    o['published_at'] = f.published_at
+    o['authors'] = f.authors
+    o['word_count'] = f.word_count
+    o['excerpt'] = f.excerpt
+
 
     click.echo(dumper(o))
 
