@@ -8,6 +8,9 @@ A command-line tool for getting meta information from a URL
 - [?] Integrate newspaper egg
 -  [x] `title = list(extract_element('title', f).values())[0]`
 - [ ] FetchedResource to Dictionary
+- [ ] image url fetcher
+- [ ] Make source list
+- [ ] Turn into CLI
 
 
 # Current state of usage:
