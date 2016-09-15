@@ -15,7 +15,9 @@ def dumper(obj, template_name=DEFAULT_TEMPLATE):
 
 @click.command()
 @click.argument('url')
-def fetch_metadata(url):
+@click.option('--tabular', '-t', is_flag=True)
+
+def fetch_metadata(url, tabular):
     o = OrderedDict()
     f = FetchedResource(url)
     o['slug'] = f.slug
@@ -28,8 +30,14 @@ def fetch_metadata(url):
     o['word_count'] = f.word_count
     o['excerpt'] = f.excerpt
 
+    if tabular:
+        click.echo(dumper(o), err=True)
+        click.echo('\t'.join(
+            [o['title'], o['url'], o['description'], str(o['word_count'])]
+        ))
+    else:
+        click.echo(dumper(o))
 
-    click.echo(dumper(o))
 
 
 

@@ -4,7 +4,10 @@ from datetime import datetime
 from slugify import slugify_url
 from urllib.parse import urlparse
 from newspaper import fulltext, Article
+from newspaper.article import ArticleException
 import re
+
+from lxml import html as htmlparser
 
 EXCERPT_WORD_COUNT = 60
 
@@ -17,21 +20,30 @@ class FetchedResource:
         self.returned_url = self.article.url
 
         self.html = self.article.html
-        self.fulltext = re.sub('\s+', ' ', fulltext(self.html)).strip()
+        try:
+            self.fulltext = re.sub('\s+', ' ', fulltext(self.html)).strip()
+        except AttributeError:
+            self.fulltext = ""
+
         # resp = self._fetch(self.fetched_url)
-        self.doc = self.article.doc
+        try:
+            self.doc = self.article.doc
+        except ArticleException:
+            self.doc = htmlparser.fromstring(self.html)
+
         # self.headers = resp.headers
         # self.encoding = resp.encoding
         # self.status_code = resp.status_code
         # self.history = resp.history
 
         # elements
-        self.canonical_url = self._extract_element('canonical_url')[0] or self.returned_url
+        _c = self._extract_element('canonical_url')
+        self.canonical_url = _c[0] if _c else self.returned_url
 
         self.titles = self._extract_element('title')
         self.title = self.titles[0]
         self.descriptions = self._extract_element('description')
-        self.description = self.descriptions[0]
+        self.description = self.descriptions[0] if self.descriptions else ""
         # necessary to do an extractor for authors, to present different candidates?
         self.authors = self.article.authors
         self.words = re.split(r' ', self.fulltext)
@@ -51,7 +63,7 @@ class FetchedResource:
 
 
     def _extract_element(self, element_name):
-        return list(extract_element_from_doc('title', self.doc).values())
+        return list(extract_element_from_doc(element_name, self.doc).values())
 
 
     # def _fetch(self, url):

@@ -47,3 +47,7 @@ excerpt: |
 - [ ] image url fetcher
 - [X] Turn into CLI
 - [ ] Make source list in data/publiushers.txt
+
+# Broken URLs
+
+- http://www.stanforddaily.com/2013/09/17/transfer-student-experience-offers-rewards-challenges/
