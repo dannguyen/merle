@@ -10,6 +10,7 @@ import re
 from lxml import html as htmlparser
 
 EXCERPT_WORD_COUNT = 60
+WS_RX = re.compile(r'\s+')
 
 class FetchedResource:
     def __init__(self, url):
@@ -44,6 +45,7 @@ class FetchedResource:
         self.title = self.titles[0]
         self.descriptions = self._extract_element('description')
         self.description = self.descriptions[0] if self.descriptions else ""
+        self.description = WS_RX.sub(' ', self.description).strip()
         # necessary to do an extractor for authors, to present different candidates?
         self.authors = self.article.authors
         self.words = re.split(r' ', self.fulltext)

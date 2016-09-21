@@ -30,7 +30,7 @@ setup(
         'jinja templates': 'merle/templates/*.txt',
         'data': 'merle/data/*.txt'},
     entry_points={
-        'console_scripts': ['merle = merle.cli:fetch_metadata']
+        'console_scripts': ['merle = merle.cli:cli']
     },
     install_requires = install_requires
 )

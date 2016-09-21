@@ -2,9 +2,10 @@ import click
 from collections import OrderedDict
 from jinja2 import Environment, PackageLoader
 from merle.fetched_resource import FetchedResource
-
+from slugify import slugify as string_slugify
 
 DEFAULT_TEMPLATE = 'yaml.jinja2.txt'
+
 
 def dumper(obj, template_name=DEFAULT_TEMPLATE):
     env = Environment(loader=PackageLoader('merle', 'templates'),
@@ -12,12 +13,19 @@ def dumper(obj, template_name=DEFAULT_TEMPLATE):
     t = env.get_template(template_name)
     return t.render(f=obj)
 
+@click.group()
+def cli():
+    pass
 
-@click.command()
+@cli.command()
+@click.argument('title')
+def slugify(title):
+    click.echo(string_slugify(title))
+
+@cli.command()
 @click.argument('url')
 @click.option('--tabular', '-t', is_flag=True)
-
-def fetch_metadata(url, tabular):
+def meta(url, tabular):
     o = OrderedDict()
     f = FetchedResource(url)
     o['slug'] = f.slug
@@ -42,4 +50,4 @@ def fetch_metadata(url, tabular):
 
 
 if __name__ == '__main__':
-    fetch_metadata()
+    cli()
