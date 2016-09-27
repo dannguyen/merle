@@ -24,8 +24,10 @@ def slugify(title):
 
 @cli.command()
 @click.argument('url')
+@click.option('--anchor-link', '-a', is_flag=True)
 @click.option('--tabular', '-t', is_flag=True)
-def meta(url, tabular):
+@click.option('--markdown', '-m', is_flag=True)
+def meta(url, tabular, markdown, anchor_link):
     o = OrderedDict()
     f = FetchedResource(url)
     o['slug'] = f.slug
@@ -43,6 +45,10 @@ def meta(url, tabular):
         click.echo('\t'.join(
             [o['title'], o['url'], o['description'], str(o['word_count'])]
         ))
+    elif markdown:
+        click.echo("""[%s](%s)""" % (o['title'], o['url']))
+    elif anchor_link:
+        click.echo("""<a href="%s">%s</a>""" % (o['url'], o['title']))
     else:
         click.echo(dumper(o))
 
