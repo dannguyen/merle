@@ -5,6 +5,7 @@ from merle.fetched_resource import FetchedResource
 from slugify import slugify as string_slugify
 
 DEFAULT_TEMPLATE = 'yaml.jinja2.txt'
+BRIEF_TEMPLATE = 'brief.yaml.jinja2.txt'
 
 
 def dumper(obj, template_name=DEFAULT_TEMPLATE):
@@ -25,9 +26,11 @@ def slugify(title):
 @cli.command()
 @click.argument('url')
 @click.option('--anchor-link', '-a', is_flag=True)
+@click.option('--brief', '-b', is_flag=True)
 @click.option('--tabular', '-t', is_flag=True)
 @click.option('--markdown', '-m', is_flag=True)
-def meta(url, tabular, markdown, anchor_link):
+
+def meta(url, tabular, markdown, anchor_link, brief):
     o = OrderedDict()
     f = FetchedResource(url)
     o['slug'] = f.slug
@@ -49,6 +52,8 @@ def meta(url, tabular, markdown, anchor_link):
         click.echo("""[%s](%s)""" % (o['title'], o['url']))
     elif anchor_link:
         click.echo("""<a href="%s">%s</a>""" % (o['url'], o['title']))
+    elif brief:
+        click.echo(dumper(o, BRIEF_TEMPLATE))
     else:
         click.echo(dumper(o))
 

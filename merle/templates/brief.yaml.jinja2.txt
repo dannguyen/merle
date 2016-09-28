@@ -1,0 +1,11 @@
+title: {{ f.title }}
+url: {{ f.url }}
+description: |
+  {{ f.description }}
+published_at: {{ f.published_at | default("''", true) }}
+{% if f.authors %}
+authors:
+  {% for a in f.authors %}
+  - {{ a }}
+  {% endfor %}
+{% endif %}
